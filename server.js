@@ -1,9 +1,9 @@
 // Dependencies
-const { v4: uuidv4 } = require('uuid');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 let dbData = require('./db/db.json');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 
@@ -28,7 +28,7 @@ app.get('/notes', (req, res) => {
 
 // GET /api/notes to read the db.json file and return all saved notes as JSON
 app.get('/api/notes', (req, res) => {
-    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
         if(err) {
             console.log(err);
         } else {
@@ -41,15 +41,16 @@ app.get('/api/notes', (req, res) => {
 // db.json file, and then return the new note to client. need to give each note
 // a unique ID
 app.post('api/notes', (req, res) => {
+    console.info(`${req.method} request received to add note`);
     const { title, text } = req.body;
-    if(title && text) {
+    if (title && text) {
         const newNote = {
             title,
             text,
             id: uuidv4(),
         };
 
-        fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+        fs.readFile('./db/db.json', 'utf8', (err, data) => {
             if(err) {
                 console.log(err);
             } else {
@@ -60,17 +61,19 @@ app.post('api/notes', (req, res) => {
                     './db/db.json', 
                     JSON.stringify(parsedNotes, null, 4),
                     (writeErr) =>
-                    writeErr 
-                        ? console.error(writeErr) 
-                        : console.info('Successfully updated notes')
+                        writeErr 
+                            ? console.error(writeErr) 
+                            : console.info('Successfully updated notes')
                 );
             }
         });
 
         const response = {
+            status: 'success',
             body: newNote,
         };
 
+        console.log(response);
         res.json(response);
     } else {
         res.json('Error creating new note');
