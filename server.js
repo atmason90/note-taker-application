@@ -57,7 +57,7 @@ app.post('api/notes', (req, res) => {
                 parsedNotes.push(newNote);
                 fs.writeFile(
                     './db/db.json', 
-                    JSON.stringify(parsedNotes, null, 4),
+                    JSON.stringify(parsedNotes),
                     (writeErr) =>
                     writeErr 
                         ? console.error(writeErr) 
@@ -67,7 +67,6 @@ app.post('api/notes', (req, res) => {
         });
 
         const response = {
-            status: 'success',
             body: newNote,
         };
 
