@@ -40,7 +40,7 @@ app.get('/api/notes', (req, res) => {
 // POST /api/notes to receive a new note to save on the request body, add it to
 // db.json file, and then return the new note to client. need to give each note
 // a unique ID
-app.post('api/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
     console.info(`${req.method} request received to add note`);
     const { title, text } = req.body;
     if (title && text) {
@@ -69,7 +69,6 @@ app.post('api/notes', (req, res) => {
         });
 
         const response = {
-            status: 'success',
             body: newNote,
         };
 
