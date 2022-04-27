@@ -49,15 +49,16 @@ app.post('api/notes', (req, res) => {
             id: uuidv4(),
         };
 
-        fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        fs.readFile('./db/db.json', 'utf-8', (err, data) => {
             if(err) {
                 console.log(err);
             } else {
                 const parsedNotes = JSON.parse(data);
                 parsedNotes.push(newNote);
+                dbData = parsedNotes;
                 fs.writeFile(
                     './db/db.json', 
-                    JSON.stringify(parsedNotes),
+                    JSON.stringify(parsedNotes, null, 4),
                     (writeErr) =>
                     writeErr 
                         ? console.error(writeErr) 
