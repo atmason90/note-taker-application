@@ -88,7 +88,7 @@ app.delete('/api/notes/:id', (req, res) => {
        for(let i = 0; i < noteData.length; i++) {
            if (id == noteData[i].id) {
                noteData.splice(i, 1);
-               fs.writeFile('./db/db.json', JSON.stringify(noteData), (err) => {
+               fs.writeFile('./db/db.json', JSON.stringify(noteData, null, 4), (err) => {
                    if (err) {
                        console.log(err);
                    } else {
