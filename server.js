@@ -22,8 +22,6 @@ app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
-
-
 // api routes
 
 // GET /api/notes to read the db.json file and return all saved notes as JSON
@@ -78,6 +76,29 @@ app.post('/api/notes', (req, res) => {
         res.json('Error creating new note');
     }
 });
+
+// DELETE request at api/notes that takes in a specific id and removes it from json content
+app.delete('/api/notes/:id', (req, res) => {
+   const deleteNote = req.params.id;
+   fs.readFile('./db/db.json', 'utf8', (error, response) => {
+       if(error) {
+           console.log(error);
+       }
+       let notes = JSON.parse(response);
+       if(deleteNote <= notes.length) {
+           res.json(notes.splice(deleteNote - 1, 1));
+           for(let i = 0; i < notes.length; i++) {
+               notes[i].id = i+1;
+           }
+           fs.writeFile('./db/db.json', JSON.stringify(notes, null, 4), (err) => {
+               if (err) throw err;
+           });
+       } else {
+           res.json(false);
+       }
+
+   })
+})
 
 
 app.get('*', (req, res) => {
