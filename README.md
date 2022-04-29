@@ -1,7 +1,7 @@
 # Note Taker Application
 ![License Badge](https://img.shields.io/badge/License-MIT-blue)
 
-GitHub Repository: https://github.com/atmason90/note-taker-application 
+GitHub Repository: https://github.com/atmason90/note-taker-application  
 Deployed Application: https://pronotetakerapp.herokuapp.com/ 
 
 
