@@ -99,6 +99,8 @@ app.delete('/api/notes/:id', (req, res) => {
 ## Technologies Used
 
 ![Java Badge](https://img.shields.io/badge/Language-JavaScript-yellow)
+![HTML Badge](https://img.shields.io/badge/Language-HTML-9cf)
+![CSS Badge](https://img.shields.io/badge/Language-CSS-lightgrey)
 ![Node Badge](https://img.shields.io/badge/Environment-Node.js-green)
 ![Express Badge](https://img.shields.io/badge/Backend-Express.js-important)
 ![Heroku Badge](https://img.shields.io/badge/Deployment-Heroku-blueviolet)
